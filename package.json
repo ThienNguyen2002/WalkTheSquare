@@ -1,0 +1,19 @@
+{
+  "name": "walkthesquare",
+  "version": "1.0.0",
+  "description": "A mobile app that uses geofencing technology to alert customers when they are near a Square seller. The app could display a list of nearby sellers and their current promotions, encouraging customers to stop by and make a purchase.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThienNguyen2002/WalkTheSquare.git"
+  },
+  "author": "Thien Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThienNguyen2002/WalkTheSquare/issues"
+  },
+  "homepage": "https://github.com/ThienNguyen2002/WalkTheSquare#readme"
+}
