@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Platform, KeyboardAvoidingView } from 'react-native';
+import { View, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import { Button, Input, Text } from '@rneui/base';
 import { StyleSheet } from 'react-native';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import displayAuthError from '../actions/AuthError';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -15,17 +16,31 @@ const LoginScreen = () => {
       console.log('Logged in successfully');
     } catch (error) {
       console.error('Error logging in:', error);
+    if (error instanceof Error) {
+      console.error('Error logging in:', error);
+      displayAuthError(error as FirebaseError);
+    } else {
+      console.error('Unknown error:', error);
+      Alert.alert('Error', 'Unknown error occurred');
     }
-    //console.log('Logging in with credentials:', login, password);
+    }
+   
   };
 
   const handleSignUp = async () => {
-    //console.log('Signing up with credentials:', login, password);
+    
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log('Signed up successfully');
     } catch (error) {
-      console.error('Error signing up:', error);
+      if (error instanceof Error) {
+        console.error('Error signing up:', error);
+        displayAuthError(error as FirebaseError);
+      } else {
+        console.error('Unknown error:', error);
+        Alert.alert('Error', 'Unknown error occurred');
+      }
+
     }
   };
 
@@ -36,7 +51,7 @@ const LoginScreen = () => {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
     >
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.title}>Sign In or Sign Up</Text>
         <Input
           placeholder="Login (Email)"
           value={email}
