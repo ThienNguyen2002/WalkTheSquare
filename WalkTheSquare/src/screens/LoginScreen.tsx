@@ -2,18 +2,31 @@ import React, { useState } from 'react';
 import { View, Platform, KeyboardAvoidingView } from 'react-native';
 import { Button, Input, Text } from '@rneui/base';
 import { StyleSheet } from 'react-native';
+import { auth } from '../../firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = () => {
-  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    console.log('Logging in with credentials:', login, password);
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('Logged in successfully');
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+    //console.log('Logging in with credentials:', login, password);
   };
 
-  const handleSignUp = () => {
-    console.log('Signing up with credentials:', login, password);
-    // Implement your sign-up logic here
+  const handleSignUp = async () => {
+    //console.log('Signing up with credentials:', login, password);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log('Signed up successfully');
+    } catch (error) {
+      console.error('Error signing up:', error);
+    }
   };
 
   return (
@@ -25,9 +38,9 @@ const LoginScreen = () => {
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Sign In</Text>
         <Input
-          placeholder="Login"
-          value={login}
-          onChangeText={(text) => setLogin(text)}
+          placeholder="Login (Email)"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
           style={styles.input}
         />
         <Input
