@@ -1,48 +1,30 @@
 import React, { useState } from 'react';
-import { View, Platform, KeyboardAvoidingView, Alert } from 'react-native';
-import { Button, Input, Text } from '@rneui/base';
+import { View, Platform, KeyboardAvoidingView} from 'react-native';
+import {  Button, Input, Text } from '@rneui/base';
 import { StyleSheet } from 'react-native';
-import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import displayAuthError from '../actions/AuthError';
+import { useAuth } from '../hooks/useAuth'
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../App';
 
 const LoginScreen = () => {
+
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  const onSuccess = () => {
+    navigation.navigate('Home');
+  };
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { handleLogin, handleSignUp, authError } = useAuth(onSuccess);
 
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log('Logged in successfully');
-    } catch (error) {
-      console.error('Error logging in:', error);
-    if (error instanceof Error) {
-      console.error('Error logging in:', error);
-      displayAuthError(error as FirebaseError);
-    } else {
-      console.error('Unknown error:', error);
-      Alert.alert('Error', 'Unknown error occurred');
-    }
-    }
-   
-  };
+  if (authError) {
+    console.error('Authentication error:', authError);
+    displayAuthError(authError);
+  }
 
-  const handleSignUp = async () => {
-    
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log('Signed up successfully');
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('Error signing up:', error);
-        displayAuthError(error as FirebaseError);
-      } else {
-        console.error('Unknown error:', error);
-        Alert.alert('Error', 'Unknown error occurred');
-      }
-
-    }
-  };
 
   return (
     <KeyboardAvoidingView
@@ -65,9 +47,9 @@ const LoginScreen = () => {
           secureTextEntry
           style={styles.input}
         />
-        <Button onPress={handleLogin} title="Log In" />
+        <Button onPress={() => handleLogin(email, password)} title="Sign In" />
         <Text style={styles.orText}>or</Text>
-        <Button onPress={handleSignUp} title="Sign Up" />
+        <Button onPress={() => handleSignUp(email, password)} title="Sign Up" />
       </View>
     </KeyboardAvoidingView>
   );
