@@ -1,5 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+//const Tab = createBottomTabNavigator();
+
+//Map view and Profile view
 
 const HomeScreen = () => {
   return (
