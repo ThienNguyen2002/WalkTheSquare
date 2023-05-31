@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Platform, KeyboardAvoidingView} from 'react-native';
 import {  Button, Input, Text } from '@rneui/base';
 import { StyleSheet } from 'react-native';
@@ -16,14 +16,18 @@ const LoginScreen = () => {
   };
 
 
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { handleLogin, handleSignUp, authError } = useAuth(onSuccess);
 
-  if (authError) {
-    console.error('Authentication error:', authError);
-    displayAuthError(authError);
-  }
+  useEffect(() => {
+    if (authError) {
+      console.error('Authentication error:', authError);
+      displayAuthError(authError);
+    }
+  }, [authError]);
 
 
   return (
