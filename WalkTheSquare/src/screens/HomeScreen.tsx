@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import SampleMap from '../components/MapView';
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //const Tab = createBottomTabNavigator();
@@ -10,6 +11,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to the Home Screen</Text>
+      <SampleMap />
     </View>
   );
 };
