@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import SampleMap from '../components/MapView';
+import { getAndMonitorLocation } from '../services/GeoLocationService';
+
+
+
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //const Tab = createBottomTabNavigator();
@@ -8,10 +11,25 @@ import SampleMap from '../components/MapView';
 //Map view and Profile view
 
 const HomeScreen = () => {
+
+  useEffect(() => {
+    const startGeofencing = async () => {
+      try {
+        await getAndMonitorLocation();
+      } catch (error) {
+        console.error('Error starting geofencing:', error);
+      }
+    };
+
+    startGeofencing();
+
+}, []);
+
+    
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to the Home Screen</Text>
-      <SampleMap />
+
     </View>
   );
 };
