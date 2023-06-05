@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ThienNguyen2002/WalkTheSquare/issues"
   },
-  "homepage": "https://github.com/ThienNguyen2002/WalkTheSquare#readme"
+  "homepage": "https://github.com/ThienNguyen2002/WalkTheSquare#readme",
+  "dependencies": {
+    "expo-constants": "^14.2.1"
+  }
 }
