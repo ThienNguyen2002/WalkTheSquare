@@ -1,7 +1,7 @@
 import React from 'react';
-import  MapView  from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
-const SampleMap: React.FC = () => {
+const MapScreen = () => {
   return (
     <MapView
       style={{ flex: 1 }}
@@ -11,8 +11,17 @@ const SampleMap: React.FC = () => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}
-    />
+    >
+      <Marker
+        coordinate={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+        }}
+        title={"My Marker"}
+        description={"Some description"}
+      />
+    </MapView>
   );
 };
 
-export default SampleMap;
+export default MapScreen;
