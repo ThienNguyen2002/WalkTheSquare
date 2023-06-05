@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { getAndMonitorLocation } from '../services/GeoLocationService';
+import  MapScreen from '../components/MapView';
+import MapView from 'react-native-maps';
 
 
 
@@ -29,6 +31,15 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to the Home Screen</Text>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
 
     </View>
   );
@@ -42,6 +53,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
 
