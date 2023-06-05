@@ -13,6 +13,8 @@ What it intends to do is the app uses geofencing, and if a user walks into the g
 ## How I built it
 With the technologies below, I have designed the mock-ups and the general flow of the app. 
 
+Typescript, React-Native, Firebase, Expo, Google Maps, Square API's
+
 ## Challenges I ran into
 Due to time constraints, I wasn't able to finish it on time. From finals to scratching the idea of the project. 
 
